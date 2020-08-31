@@ -26,7 +26,7 @@ module.exports = {
             // }
             //new rules to load scss
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use:['style-loader','css-loader', 'sass-loader']
             }
         ]
