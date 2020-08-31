@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
+import MainComponent from './MainComponent';
 
 export default () => {
     return (
-        <div>
-            App Component
-        </div>
+        <main id="app">
+            <Header/>
+            <MainComponent/>
+        </main>
     )
 }

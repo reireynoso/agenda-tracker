@@ -8,6 +8,5 @@ import todosReducer from '../reducers/todosReducer'
 
 export default () => {
     const store = createStore(todosReducer)
-
     return store
 }
