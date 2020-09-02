@@ -20,9 +20,19 @@ const initialData = {
     columns: {
         'column-1': {
             id: "column-1",
-            title: "List of todos",
+            title: "Unfinished Agendas",
             taskIds: ['task-1','task-2','task-3','task-4']
-        }
+        },
+        'column-2': {
+            id: "column-2",
+            title: "W.I.P Agendas",
+            taskIds: []
+        },
+        'column-3': {
+            id: "column-3",
+            title: "Finished Agendas",
+            taskIds: []
+        },
     },
     columnOrder: ['column-1']
 }

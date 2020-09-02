@@ -7,10 +7,20 @@
 // }
 
 .align-center {
-    margin: 0 10rem;
+    padding: 0 5%;
     width: 100%;
+
+    @media (min-width: $desktop-breakpoint) {
+        padding: 0 5rem;
+    }
 }
 
 button {
     cursor: pointer;
+}
+
+.category__title{
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
 }
