@@ -20,7 +20,8 @@ button {
 }
 
 .category__title{
-    margin: 0;
+    // margin: 0;
     text-align: center;
-    padding: 1rem;
+    margin: 0.5rem;
+    border-bottom: 1px solid $off-white;
 }

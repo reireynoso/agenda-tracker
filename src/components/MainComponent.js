@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input'
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 
 import {changePositioning} from '../actions/todosAction'
@@ -27,6 +28,9 @@ export default () => {
         column: {
             minHeight: "260px",
             padding: "0.5rem"
+        },
+        input: {
+          width: "100%"
         }
       }));
       
@@ -58,11 +62,12 @@ export default () => {
                     <Grid justify="center" container className={classes.root} spacing={2}>  
                           {Object.keys(columns).map(key => (
                           <Grid key={key} item xs={8} sm={6} md={4}>
+                            <h2 className="category__title">{columns[key].title}</h2>
                             <Droppable key={key} droppableId={key}>
                               {
                                 provided => (    
                                     <Paper innerRef={provided.innerRef} {...provided.droppableProps} className={classes.column}>
-                                      <h2 className="category__title">{columns[key].title}</h2>
+                                      
                                       {
                                           columns[key].taskIds.map((taskid,index) => {
                                               return <Draggable
@@ -81,6 +86,13 @@ export default () => {
                                       }
                                       {
                                         provided.placeholder
+                                      }
+                                      {
+                                        key === "column-1" ? <Input 
+                                            className={classes.input}
+                                            placeholder="New task. Press Enter"
+                                            onKeyPress={(e) => console.log(e)}
+                                          /> : null
                                       }
                                     </Paper>
                                 )
