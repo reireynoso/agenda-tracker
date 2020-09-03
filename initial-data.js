@@ -20,17 +20,17 @@ const initialData = {
     columns: {
         'column-1': {
             id: "column-1",
-            title: "Unfinished Agendas",
+            title: "Unfinished",
             taskIds: ['task-1','task-2','task-3','task-4']
         },
         'column-2': {
             id: "column-2",
-            title: "W.I.P Agendas",
+            title: "W.I.P",
             taskIds: []
         },
         'column-3': {
             id: "column-3",
-            title: "Finished Agendas",
+            title: "Finished",
             taskIds: []
         },
     },
