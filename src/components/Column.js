@@ -20,7 +20,10 @@ export default ({col}) => {
             padding: "0.5rem"
         },
         input: {
-            width: "100%"
+            width: "100%",
+            '&::after': {
+                borderBottom: "2px solid #1c88bf"
+            }
         }
     }));
 

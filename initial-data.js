@@ -33,8 +33,7 @@ const initialData = {
             title: "Finished",
             taskIds: []
         },
-    },
-    columnOrder: ['column-1']
+    }
 }
 
 export default initialData;
