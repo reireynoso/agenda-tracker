@@ -35,6 +35,7 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     //sets up the webpack-dev-server serving up the public directory
     devServer: {
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        historyApiFallback: true
     }
 };

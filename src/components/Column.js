@@ -12,7 +12,7 @@ import {addNewTask} from '../actions/todosAction'
 
 export default ({col}) => {
     const dispatch = useDispatch();
-    const columns = useSelector(state => state.columns) 
+    const columns = useSelector(state => state.todosReducer.columns) 
     const [task, setTask] = useState("")
     const useStyles = makeStyles(() => ({
         column: {

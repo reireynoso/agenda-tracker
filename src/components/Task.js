@@ -8,7 +8,7 @@ import {removeTask} from '../actions/todosAction'
 
 export default ({taskid,index,col}) => {
     const dispatch = useDispatch()
-    const tasks = useSelector(state => state.tasks);
+    const tasks = useSelector(state => state.todosReducer.tasks);
 
     const useStyles = makeStyles(() => ({
         paper: {

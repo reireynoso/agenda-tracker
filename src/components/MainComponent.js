@@ -9,8 +9,7 @@ import {changePositioning} from '../actions/todosAction'
 import Column from '../components/Column'
 
 export default () => {
-    const columns = useSelector(state => state.columns) 
-
+    const columns = useSelector(state => state.todosReducer.columns) 
     const dispatch = useDispatch()
     const useStyles = makeStyles(() => ({
         root: {
