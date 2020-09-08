@@ -95,7 +95,11 @@ export default (state = initialData, action) => {
                     ...state.columns,
                     "column-1": {
                         ...state.columns["column-1"],
-                        taskIds: [...state.columns["column-1"].taskIds, payload.id]
+                        // taskIds: [...state.columns["column-1"].taskIds, payload.id]
+                        taskIds: {
+                            ...state.columns["column-1"].taskIds,
+                            [payload.id]: true
+                        }
                     }
                 }
             }

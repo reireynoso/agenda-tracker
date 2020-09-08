@@ -8,7 +8,7 @@ import 'normalize.css/normalize.css';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createStore from './store/redux-store'
-// import database from './firebase/firebase';
+import database from './firebase/firebase';
 
 const theme = createMuiTheme({
     palette:{
@@ -23,6 +23,7 @@ const theme = createMuiTheme({
 //         city: "Jersey City"
 //     }
 // })
+
 
 const store = createStore()
 

@@ -44,6 +44,8 @@ export default ({col}) => {
             }
         }
     }
+    // console.log(columns)
+    // console.log(Object.keys(columns[col].taskIds))
 
     return (
         <Grid  item xs={8} sm={6} md={4}>
@@ -56,7 +58,7 @@ export default ({col}) => {
                 {...provided.droppableProps} 
                 className={classes.column}>        
                     {
-                        columns[col].taskIds && columns[col].taskIds.map((taskid,index) => {
+                        columns[col].taskIds && Object.keys(columns[col].taskIds).map((taskid,index) => {
                             return <Task col={col} key={taskid} taskid={taskid} index={index}/>
                         })
                     }
