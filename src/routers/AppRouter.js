@@ -8,6 +8,7 @@ import LoginPage from '../components/LoginPage'
 
 import {firebase} from '../firebase/firebase';
 import {login, logout} from '../actions/auth';
+// import {startSetData} from '../actions/todosAction';
 
 import PrivateRoute from './PrivateRoute';
 // import PublicRoute from './PublicRoute'
@@ -19,11 +20,11 @@ const AppRouter = ({history}) => {
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 dispatch(login(user.uid))
-                // dispatch().then(() => {
+                // const result = dispatch(startSetData())
+                // .then(() => {
                     // console.log(history.location)
                     if(history.location.pathname === "/"){
-                        history.push('/dashboard')
-                
+                        history.push('/dashboard')      
                     }
                 // })
             }else{

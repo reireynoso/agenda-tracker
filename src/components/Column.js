@@ -9,10 +9,11 @@ import {v4 as uuidv4} from 'uuid'
 
 import Task from '../components/Task'
 import {addNewTask} from '../actions/todosAction'
+// import {startAddNewTask} from '../actions/todosAction'
 
 export default ({col}) => {
     const dispatch = useDispatch();
-    const columns = useSelector(state => state.todosReducer.columns) 
+    const columns = useSelector(state => state.todosReducer.columns);
     const [task, setTask] = useState("")
     const useStyles = makeStyles(() => ({
         column: {
@@ -38,6 +39,7 @@ export default ({col}) => {
                 }
                 // console.log(`create`, task)
                 dispatch(addNewTask(newTask))
+                // dispatch(startAddNewTask(newTask, initial))
                 setTask("")
             }
         }
@@ -54,7 +56,7 @@ export default ({col}) => {
                 {...provided.droppableProps} 
                 className={classes.column}>        
                     {
-                        columns[col].taskIds.map((taskid,index) => {
+                        columns[col].taskIds && columns[col].taskIds.map((taskid,index) => {
                             return <Task col={col} key={taskid} taskid={taskid} index={index}/>
                         })
                     }

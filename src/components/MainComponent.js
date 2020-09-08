@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {DragDropContext} from 'react-beautiful-dnd'
 
-import {changePositioning} from '../actions/todosAction'
+import {startChangePositioning} from '../actions/todosAction'
 
 import Column from '../components/Column'
 
@@ -32,7 +32,7 @@ export default () => {
       ){
         return;
       }    
-      dispatch(changePositioning(result))
+      dispatch(startChangePositioning(columns,result))
     }
     
     return(
