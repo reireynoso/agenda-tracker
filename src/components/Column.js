@@ -5,15 +5,16 @@ import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input'
 import Grid from '@material-ui/core/Grid';
 import {Droppable} from 'react-beautiful-dnd'
-import {v4 as uuidv4} from 'uuid'
+// import {v4 as uuidv4} from 'uuid'
 
 import Task from '../components/Task'
-import {addNewTask} from '../actions/todosAction'
-// import {startAddNewTask} from '../actions/todosAction'
+// import {addNewTask} from '../actions/todosAction'
+import {startAddNewTask} from '../actions/todosAction'
 
 export default ({col}) => {
     const dispatch = useDispatch();
     const columns = useSelector(state => state.todosReducer.columns);
+
     const [task, setTask] = useState("")
     const useStyles = makeStyles(() => ({
         column: {
@@ -34,12 +35,12 @@ export default ({col}) => {
         if(e.key === "Enter"){
             if(task){
                 const newTask = {
-                    id: uuidv4(),
+                    // id: uuidv4(),
                     content: task
                 }
                 // console.log(`create`, task)
-                dispatch(addNewTask(newTask))
-                // dispatch(startAddNewTask(newTask, initial))
+                // dispatch(addNewTask(newTask))
+                dispatch(startAddNewTask(newTask))
                 setTask("")
             }
         }

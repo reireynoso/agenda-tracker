@@ -3,13 +3,13 @@ import {useSelector, useDispatch} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Draggable} from 'react-beautiful-dnd'
-import {removeTask} from '../actions/todosAction'
+import {startRemoveTask} from '../actions/todosAction'
 // import ContentEditable from 'react-contenteditable'
 
 export default ({taskid,index,col}) => {
     const dispatch = useDispatch()
     const tasks = useSelector(state => state.todosReducer.tasks);
-
+    const agenda = useSelector(state => state.todosReducer);
     const useStyles = makeStyles(() => ({
         paper: {
             padding: "0.6rem",
@@ -25,9 +25,14 @@ export default ({taskid,index,col}) => {
     const handleRemoveTask = (e) => {
         e.preventDefault();
         // console.log(col, taskid)
-        dispatch(removeTask({
+        // dispatch(removeTask({
+        //     col,
+        //     taskid
+        // }))
+        dispatch(startRemoveTask({
             col,
-            taskid
+            taskid,
+            agenda
         }))
     }
     return (

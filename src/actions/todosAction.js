@@ -20,9 +20,9 @@ export const setData = (data) => ({
     payload: data
 })
 
-// export const startSetData = () => {
-//     return (dispatch,getState) => {
-//         const uid = getState().auth.uid;
+export const startSetData = () => {
+    return (dispatch,getState) => {
+        const uid = getState().auth.uid;
 
         // return database.ref(`users/${uid}`).once('value').then((snapshot) => {
         //     debugger
@@ -37,44 +37,128 @@ export const setData = (data) => ({
         //     dispatch(setData(snapshot.val()))
         // })
 
-//         return database.ref(`users/${uid}`).once('value').then((snapshot) => {
-//             // debugger
-//             dispatch(setData(snapshot.val()))
-//         })
-//     }
-// }
+        return database.ref(`users/${uid}`).once('value').then((snapshot) => {
+            // debugger
+            // console.log(snapshot)
+            // console.log(snapshot.val())
+            if(!snapshot.val()){
+                database.ref(`users/${uid}`).set({
+                    columns: {
+                        'column-1': {
+                            title: "Unfinished",
+                            taskIds: {
 
-// export const startAddNewTask = (taskObj, intitial) => {
-//     return (dispatch, getState) => {
-//         const uid = getState().auth.uid
-//         const usersRef = database.ref(`users/${uid}`);
-//         usersRef.set({
-//                 tasks: {
-//                     ...taskObj
-//                 },
-                // columns: {
-                //     'column-1': {
-                //         title: "Unfinished",
-                //         taskIds: []
-                //     },
-                //     'column-2': {
-                //         title: "W.I.P",
-                //         taskIds: []
-                //     },
-                //     'column-3': {
-                //         title: "Finished",
-                //         taskIds: []
-                //     },
-                // }
-        // })
-        // return database.ref(`users/${uid}`).push(taskObj).then((ref) => {
-        //     dispatch(addNewTask({
-        //         id: ref.key,
-        //         ...taskObj
-        //     }))
-        // })
-//     }
-// }
+                            }
+                        },
+                        'column-2': {
+                            title: "W.I.P",
+                            taskIds: {
+
+                            }
+                        },
+                        'column-3': {
+                            title: "Finished",
+                            taskIds: {
+
+                            }
+                        },
+                    }
+                })
+            }
+            dispatch(setData(snapshot.val()))
+        })
+    }
+}
+
+export const startAddNewTask = (taskObj) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        // if(initial){
+        //     const usersRef = database.ref(`users/${uid}`);
+        //     usersRef.set({
+        //             tasks: {
+        //                 ...taskObj
+        //             },
+        //             columns: {
+        //                 'column-1': {
+        //                     title: "Unfinished",
+        //                     taskIds: {
+
+        //                     }
+        //                 },
+        //                 'column-2': {
+        //                     title: "W.I.P",
+        //                     taskIds: {
+
+        //                     }
+        //                 },
+        //                 'column-3': {
+        //                     title: "Finished",
+        //                     taskIds: {
+
+        //                     }
+        //                 },
+        //             }
+        //     }).then(ref => {
+        //         console.log(ref.key)
+        //         database.ref(`users/${uid}/columns/column-1/taskIds`).push({
+        //             id: ref.key,
+        //             ...taskObj
+        //         })
+        //         dispatch(addNewTask({
+        //             id: ref.key,
+        //             ...taskObj
+        //         }))
+        //     })
+        // }else{
+            return database.ref(`users/${uid}/tasks`).push(taskObj).then((ref) => {
+                database.ref(`users/${uid}/columns/column-1/taskIds`).update({
+                    [ref.key]: true
+                })
+                dispatch(addNewTask({
+                    id: ref.key,
+                    ...taskObj
+                }))
+            })
+        // }
+
+    }
+}
+
+export const startRemoveTask = ({col,taskid, agenda}) => {
+    return (dispatch, getState) => {
+
+        // const {col, taskid} = action.payload;
+            //make a copy of the tasks object
+        const uid = getState().auth.uid
+        const copyOfTasksObject = {
+            ...agenda.tasks
+        }
+        // destructively delete the key from the copy
+        delete copyOfTasksObject[taskid]
+
+        const copyOfTaskids = {
+            ...agenda.columns[col].taskIds
+        }
+
+        delete copyOfTaskids[taskid]
+        const updatedRemoved = {
+            ...agenda,
+            tasks: copyOfTasksObject,
+            columns: {
+                ...agenda.columns,
+                [col]:{
+                    ...agenda.columns[col],
+                    // taskIds: agenda.columns[col].taskIds.filter(id => id !== taskid)
+                    taskIds: copyOfTaskids
+                }
+            }
+        }
+        return database.ref(`users/${uid}`).update(updatedRemoved).then(() => {
+            dispatch(removeTask(updatedRemoved))
+        })
+    }
+}
 
 export const startChangePositioning = (columns, result) => {
     return (dispatch,getState) => {
@@ -128,7 +212,7 @@ export const startChangePositioning = (columns, result) => {
             delete removedFromSource[draggableId]
             //add to destination
             // debugger
-            
+
             const newCopyOfDestinationTask = {};
 
             const selectedColumn = columns[destination.droppableId].taskIds
@@ -201,8 +285,11 @@ export const startChangePositioning = (columns, result) => {
                 }
             }
         }
-        // return database.ref(`users/${uid}/columns`).update(updatedColumns).then(() => {
-            dispatch(changePositioning(updatedColumns))
+        dispatch(changePositioning(updatedColumns))
+        // console.log(updatedColumns["column-1"].taskIds)
+        // return database.ref(`users/${uid}/columns`).remove().then(() => {
+            // database.ref(`users/${uid}/columns`).set(updatedColumns)
         // })
+        return database.ref(`users/${uid}/columns`).update(updatedColumns)
     }
 }

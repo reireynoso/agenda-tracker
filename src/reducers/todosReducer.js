@@ -3,7 +3,8 @@ import initialData from '../../initial-data'
 export default (state = initialData, action) => {
     switch(action.type){
         case "SETDATA":
-            // let tasks = action.payload || initialData
+            // debugger
+            let data = action.payload || initialData
             // const columns = {
             //         'column-1': {
             //             title: "Unfinished",
@@ -32,7 +33,7 @@ export default (state = initialData, action) => {
 
             // console.log(data)
             
-            return initialData
+            return data
         case "DRAGNDROP":
             // console.log(action.payload)
             // const {destination, draggableId, source} = action.payload;
@@ -77,6 +78,7 @@ export default (state = initialData, action) => {
             //     }
             //     return updatedObj
             // }
+            
             const updatedColumns = {
                 ...state,
                 columns: action.payload
@@ -105,25 +107,32 @@ export default (state = initialData, action) => {
             }
             return updatedState    
         case "REMOVETASK":
-            const {col, taskid} = action.payload;
-            //make a copy of the tasks object
-            const copyOfTasksObject = {
-                ...state.tasks
-            }
-            // destructively delete the key from the copy
-            delete copyOfTasksObject[taskid]
-            const updatedRemoved = {
-                ...state,
-                tasks: copyOfTasksObject,
-                columns: {
-                    ...state.columns,
-                    [col]:{
-                        ...state.columns[col],
-                        taskIds: state.columns[col].taskIds.filter(id => id !== taskid)
-                    }
-                }
-            }
-            return updatedRemoved
+            // const {col, taskid} = action.payload;
+            // //make a copy of the tasks object
+            // const copyOfTasksObject = {
+            //     ...state.tasks
+            // }
+            // // destructively delete the key from the copy
+            // delete copyOfTasksObject[taskid]
+
+            // const copyOfTaskids = {
+            //     ...state.columns[col].taskIds
+            // }
+
+            // delete copyOfTaskids[taskid]
+            // const updatedRemoved = {
+            //     ...state,
+            //     tasks: copyOfTasksObject,
+            //     columns: {
+            //         ...state.columns,
+            //         [col]:{
+            //             ...state.columns[col],
+            //             // taskIds: state.columns[col].taskIds.filter(id => id !== taskid)
+            //             taskIds: copyOfTaskids
+            //         }
+            //     }
+            // }
+            return action.payload
         default: 
             return state;
     }
