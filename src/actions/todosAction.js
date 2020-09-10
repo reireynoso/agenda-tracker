@@ -70,7 +70,7 @@ export const startSetData = () => {
     }
 }
 
-export const startAddNewTask = (taskObj) => {
+export const startAddNewTask = (taskObj, columns) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid
         // if(initial){
@@ -111,9 +111,11 @@ export const startAddNewTask = (taskObj) => {
         //         }))
         //     })
         // }else{
+            const taskids = columns["column-1"].taskIds
+            const taskidsArray = taskids ? Object.keys(columns["column-1"].taskIds) : []
             return database.ref(`users/${uid}/tasks`).push(taskObj).then((ref) => {
                 database.ref(`users/${uid}/columns/column-1/taskIds`).update({
-                    [ref.key]: true
+                    [ref.key]: taskidsArray.length > 0 ? taskidsArray.length : 0
                 })
                 dispatch(addNewTask({
                     id: ref.key,
@@ -212,33 +214,54 @@ export const startChangePositioning = (columns, result) => {
             delete removedFromSource[draggableId]
             //add to destination
             // debugger
+            const keysOfRemovedFromSource = Object.keys(removedFromSource)
+            if(keysOfRemovedFromSource.length > 0){
+                if(keysOfRemovedFromSource.length === 1){
+                    removedFromSource[keysOfRemovedFromSource[0]] = 0;
+                }
+
+                if(keysOfRemovedFromSource.length > 1){
+                    // sort out the removedFromSource by values
+                    // array of arrays with each array containing key and value
+                    const separate = Object.entries(removedFromSource)
+                    const sorted = separate.sort((a,b) => a[1] - b[1])
+
+                    // iterate over the sorted and assign the new values
+                    for(let i = 0; i < sorted.length; i++){
+                        removedFromSource[sorted[i][0]] = i;
+                    }
+                }
+            }
 
             const newCopyOfDestinationTask = {};
 
-            const selectedColumn = columns[destination.droppableId].taskIds
-            if(selectedColumn && Object.keys(selectedColumn).length === 0){
-                newCopyOfDestinationTask[draggableId] = true;
-            }
-            else{
+            // const selectedColumn = columns[destination.droppableId].taskIds
+            // if(selectedColumn && Object.keys(selectedColumn).length === 0){
+            //     newCopyOfDestinationTask[draggableId] = true;
+            // }
+            let order = 0;
+            // else{
                 // checks if column id has taskIds defined (since Firebase eliminates the property if empty)
-                if(columns[destination.droppableId].taskIds){
-                    const columnTaskids = Object.keys(columns[destination.droppableId].taskIds)
-                    for(let i = 0; i < columnTaskids.length; i++){
-                        if(destination.index === i){
-                            // debugger
-                            newCopyOfDestinationTask[draggableId] = true;
-                        }
-                        newCopyOfDestinationTask[columnTaskids[i]] = true
+            if(columns[destination.droppableId].taskIds){
+                const columnTaskids = Object.keys(columns[destination.droppableId].taskIds)
+                for(let i = 0; i < columnTaskids.length; i++){
+                    if(destination.index === i){
+                        // debugger
+                        newCopyOfDestinationTask[draggableId] = order;
+                        order++
                     }
-
-                    if(destination.index === columnTaskids.length){
-                        newCopyOfDestinationTask[draggableId] = true;
-                    }
-                    // debugger
-                }else{
-                    newCopyOfDestinationTask[draggableId] = true
+                    newCopyOfDestinationTask[columnTaskids[i]] = order
+                    order++
                 }
+
+                if(destination.index === columnTaskids.length){
+                    newCopyOfDestinationTask[draggableId] = order;
+                }
+                // debugger
+            }else{
+                newCopyOfDestinationTask[draggableId] = order
             }
+            // }
             // debugger
             // iterate through keys and insert new one when apprpriate 
             // newCopyOfDestinationTask.splice(destination.index, 0, draggableId)
@@ -258,6 +281,7 @@ export const startChangePositioning = (columns, result) => {
             //if same column, just change index
             // const newLocation = columns[source.droppableId].taskIds
             //remove the old task location
+            let order = 0;
             const removeOldLocation = {
                 ...columns[source.droppableId].taskIds
             }
@@ -268,13 +292,15 @@ export const startChangePositioning = (columns, result) => {
             //iterate through the old taskids and add the new one in the right location
             for(let i = 0; i < columnTaskids.length; i++){
                 if(destination.index === i){
-                    newLocation[draggableId] = true;
+                    newLocation[draggableId] = order;
+                    order++
                 }
-                newLocation[columnTaskids[i]] = true
+                newLocation[columnTaskids[i]] = order
+                order++
             }
 
             if(destination.index === columnTaskids.length){
-                newLocation[draggableId] = true;
+                newLocation[draggableId] = order;
             }
 
             updatedColumns = {

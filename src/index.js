@@ -16,15 +16,6 @@ const theme = createMuiTheme({
     }
 })
 
-// database.ref().set({
-//     "name": "Rei Reynoso",
-//     age: 29,
-//     location: {
-//         city: "Jersey City"
-//     }
-// })
-
-
 const store = createStore()
 
 const jsx = (

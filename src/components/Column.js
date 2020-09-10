@@ -40,10 +40,24 @@ export default ({col}) => {
                 }
                 // console.log(`create`, task)
                 // dispatch(addNewTask(newTask))
-                dispatch(startAddNewTask(newTask))
+                dispatch(startAddNewTask(newTask, columns))
                 setTask("")
             }
         }
+    }
+
+    const handleRender = () => {
+        const reorder = Object.entries(columns[col].taskIds)
+        reorder.sort((a,b) => a[1] - b[1])
+        const reformatted = reorder.map((taskid,index) => {
+            // console.log(taskid)
+            return <Task col={col} key={taskid[0]} taskid={taskid[0]} index={index}/>
+        })
+        // const reformatted = Object.keys(columns[col].taskIds).map((taskid,index) => {
+        //     return <Task col={col} key={taskid} taskid={taskid} index={index}/>
+        // })
+
+        return reformatted
     }
     // console.log(columns)
     // console.log(Object.keys(columns[col].taskIds))
@@ -59,9 +73,7 @@ export default ({col}) => {
                 {...provided.droppableProps} 
                 className={classes.column}>        
                     {
-                        columns[col].taskIds && Object.keys(columns[col].taskIds).map((taskid,index) => {
-                            return <Task col={col} key={taskid} taskid={taskid} index={index}/>
-                        })
+                        columns[col].taskIds && handleRender()
                     }
                     {
                     provided.placeholder
