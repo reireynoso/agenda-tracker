@@ -243,14 +243,16 @@ export const startChangePositioning = (columns, result) => {
             // else{
                 // checks if column id has taskIds defined (since Firebase eliminates the property if empty)
             if(columns[destination.droppableId].taskIds){
-                const columnTaskids = Object.keys(columns[destination.droppableId].taskIds)
+                // const columnTaskids = Object.keys(columns[destination.droppableId].taskIds)
+                const columnTaskids = Object.entries(columns[destination.droppableId].taskIds)
+                columnTaskids.sort((a,b) => a[1] - b[1])
                 for(let i = 0; i < columnTaskids.length; i++){
                     if(destination.index === i){
                         // debugger
                         newCopyOfDestinationTask[draggableId] = order;
                         order++
                     }
-                    newCopyOfDestinationTask[columnTaskids[i]] = order
+                    newCopyOfDestinationTask[columnTaskids[i][0]] = order
                     order++
                 }
 
@@ -281,6 +283,7 @@ export const startChangePositioning = (columns, result) => {
             //if same column, just change index
             // const newLocation = columns[source.droppableId].taskIds
             //remove the old task location
+            
             let order = 0;
             const removeOldLocation = {
                 ...columns[source.droppableId].taskIds
@@ -288,14 +291,16 @@ export const startChangePositioning = (columns, result) => {
             delete removeOldLocation[draggableId]
                    
             const newLocation = {}
-            const columnTaskids = Object.keys(removeOldLocation)
+            // const columnTaskids = Object.keys(removeOldLocation)
+            const columnTaskids = Object.entries(removeOldLocation)
+            columnTaskids.sort((a,b) => a[1] - b[1])
             //iterate through the old taskids and add the new one in the right location
             for(let i = 0; i < columnTaskids.length; i++){
                 if(destination.index === i){
                     newLocation[draggableId] = order;
                     order++
                 }
-                newLocation[columnTaskids[i]] = order
+                newLocation[columnTaskids[i][0]] = order
                 order++
             }
 
