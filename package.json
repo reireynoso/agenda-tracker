@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack --mode=development",
+    "start": "node server/server.js",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "build": "webpack --mode=production",
@@ -47,3 +47,4 @@
     "redux-thunk": "^2.3.0"
   }
 }
+
