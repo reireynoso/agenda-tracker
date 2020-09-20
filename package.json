@@ -5,8 +5,11 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack --mode=development",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
     "build": "webpack --mode=production",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server",
+    "heroku-postbuild": "npm run build:prod"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,7 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.2",
+    "dotenv": "^8.2.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.1",
     "style-loader": "^1.2.1",
@@ -28,6 +32,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "firebase": "^7.19.1",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
