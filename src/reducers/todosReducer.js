@@ -19,19 +19,6 @@ export default (state = initialData, action) => {
             //             taskIds: []
             //         },
             //     }
-    
-            // for(const key in tasks){
-            //     //column key
-            //    columns[tasks[key].category].taskIds[tasks[key].order] = key
-            // }
-
-
-            // const data = {
-            //     tasks,
-            //     columns
-            // }
-
-            // console.log(data)
             
             return data
         case "DRAGNDROP":

@@ -16,7 +16,6 @@ export const logout = () => ({
 })
 
 export const startLogout = () => {
-    // console.log('caled')
     return () => {
         return firebase.auth().signOut();
     }
