@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "node server/server.js",
+    "test": "jest --config=jest.config.js",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "build": "webpack --mode=production",
@@ -18,10 +19,15 @@
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.6.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.2",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "jest": "^26.6.2",
     "node-sass": "^4.14.1",
+    "react-test-renderer": "^17.0.1",
     "sass-loader": "^10.0.1",
     "style-loader": "^1.2.1",
     "uuid": "^8.3.0",
@@ -47,4 +53,3 @@
     "redux-thunk": "^2.3.0"
   }
 }
-

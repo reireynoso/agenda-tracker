@@ -63,7 +63,8 @@ module.exports = (env) => {
         //sets up the webpack-dev-server serving up the public directory
         devServer: {
             contentBase: path.join(__dirname, 'public'),
-            historyApiFallback: true
+            historyApiFallback: true,
+            publicPath: "/build/"
         }
     };
 }
