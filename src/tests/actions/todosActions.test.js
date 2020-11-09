@@ -1,6 +1,8 @@
 import {
     setData,
-    addNewTask
+    addNewTask,
+    removeTask,
+    changePositioning
 } from '../../actions/todosAction'
 import initialData from '../fixtures/todos'
 
@@ -22,5 +24,23 @@ test("Should add new task action object", () => {
     expect(action).toEqual({
         type: "ADDNEWTASK",
         payload: newTask
+    })
+})
+
+test("Should remove task action object", () => {
+    const action = removeTask(initialData)
+
+    expect(action).toEqual({
+        type: "REMOVETASK",
+        payload: initialData
+    })
+})
+
+test("Should change task action object", () => {
+    const action = changePositioning(initialData)
+
+    expect(action).toEqual({
+        type: "DRAGNDROP",
+        payload: initialData
     })
 })
