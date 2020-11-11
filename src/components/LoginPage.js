@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default ({history}) => {
+export const LoginPage = ({history}) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -95,3 +95,5 @@ export default ({history}) => {
     </Grid>
   );
 }
+
+export default LoginPage
