@@ -59,10 +59,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const LoginPage = ({history}) => {
+
+export const LoginPage = ({test=() => console.log('testing')}) => {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
+  const dispatch = process.env.NODE_ENV === "test" ? test : useDispatch();
 
   return (
     <Grid container component="main" className={classes.root}>

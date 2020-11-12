@@ -1,9 +1,5 @@
 import * as firebase from 'firebase';
 
-if(process.env.NODE_ENV === "test"){
-    require('dotenv').config({ path: '.env.test'})
-}
-
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,

@@ -5,6 +5,23 @@ import {
     changePositioning
 } from '../../actions/todosAction'
 import initialData from '../fixtures/todos'
+import database from '../../firebase/firebase'
+
+// beforeEach(() => {
+//     database.ref().update({
+//         "name": "Rei Reynoso",
+//         age: 33,
+//         isSingle: false,
+//         location: {
+//             city: "Jersey City"
+//         }
+//     }).then(() => {
+//         console.log('data is saved')
+    
+//     }).catch(error => {
+//         console.log('this failed', error)
+//     })
+// })
 
 test("Should set up todos action with data", () => {
     const action = setData(initialData);

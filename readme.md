@@ -4,7 +4,7 @@ React application for keeping track of agendas with drag and drop capabilities.
 
 *Note: For optimal performance, please utilize on Google Chrome. Styling is supported for Mobile and Web Browser*
 
-* [Deployed Version](https://clone-7b1aa.web.app/)
+* [Deployed Version](https://agenda-tracker.herokuapp.com/)
 
 ![Sample Image](public/images/agenda-tracker.png)
 
