@@ -8,7 +8,6 @@ import 'normalize.css/normalize.css';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createStore from './store/redux-store'
-import './firebase/firebase';
 
 const theme = createMuiTheme({
     palette:{
