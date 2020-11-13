@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render App page 1`] = `
+<main
+  id="app"
+>
+  <header
+    id="header"
+  >
+    <section
+      className="align-center"
+    >
+      <span
+        id="header__title"
+      >
+        Agenda Tracker
+      </span>
+      <button
+        id="header__logout"
+        onClick={[Function]}
+      >
+        Log Out
+      </button>
+    </section>
+  </header>
+  <div
+    className="align-center"
+  >
+    <main
+      id="main"
+    >
+      <h1
+        id="main__title"
+      >
+        Agendas
+      </h1>
+      <div
+        className="MuiGrid-root makeStyles-root-1 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+      />
+    </main>
+  </div>
+</main>
+`;
