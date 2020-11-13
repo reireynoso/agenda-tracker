@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {withRouter} from 'react-router'
 import {startLogout} from '../actions/auth';
 
-const Header = ({history}) => {
+export const Header = ({history}) => {
     const dispatch = useDispatch();
     return (
         <header id="header">

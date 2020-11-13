@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Header page 1`] = `
+<header
+  id="header"
+>
+  <section
+    className="align-center"
+  >
+    <span
+      id="header__title"
+    >
+      Agenda Tracker
+    </span>
+    <button
+      id="header__logout"
+      onClick={[Function]}
+    >
+      Log Out
+    </button>
+  </section>
+</header>
+`;
